@@ -16,6 +16,7 @@ swag init -o ../internal/swagger --parseDependency --dir ./,../internal/controll
 ```
 
 ### Migration
+
 - `export GOOSE_DRIVER=postgres`
 - `export GOOSE_DBSTRING="user=postgres dbname=bamis sslmode=disable password=localpassword host=localhost"`
 
@@ -32,4 +33,12 @@ goose down
 ```sh {"id":"01J4ZYVR5X9HR4QFTKVN15DDCH"}
 cd pkg/schema
 goose status
+```
+
+### Git
+
+```sh {"id":"01J4ZZXFJAQNH16SXBFTCTK6N2","interactive":"false"}
+# Remove deleted branches
+git fetch origin --prune
+git branch
 ```
