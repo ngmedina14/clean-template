@@ -38,7 +38,6 @@ goose status
 ### Git
 
 ```sh {"id":"01J4ZZXFJAQNH16SXBFTCTK6N2","interactive":"false"}
-# Remove deleted branches
-git fetch origin --prune
-git branch
+# Delete merged branches
+# git branch -d <branch-name>
 ```
