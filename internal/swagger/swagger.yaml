@@ -1,0 +1,102 @@
+definitions:
+  echo.HTTPError:
+    properties:
+      message: {}
+    type: object
+  model.User:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        $ref: '#/definitions/sql.NullTime'
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      password:
+        type: string
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+  sql.NullTime:
+    properties:
+      time:
+        type: string
+      valid:
+        description: Valid is true if Time is not NULL
+        type: boolean
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: inquire.bamis@gmail.com
+    name: API Support
+    url: http://www.bamis-portal.com
+  description: Barangay Management Information System
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: BAMIS v3 API Reference
+  version: "3.0"
+paths:
+  /users:
+    patch:
+      description: get the user by given ID
+      parameters:
+      - description: Users Name
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Accepted
+          schema:
+            $ref: '#/definitions/model.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/echo.HTTPError'
+      security:
+      - BearerToken: []
+      summary: return a specific user based on given ID
+      tags:
+      - USERS
+  /users/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get the user by given ID
+      operationId: get-string-by-int
+      parameters:
+      - description: Users ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/echo.HTTPError'
+      summary: return a specific user based on given ID
+      tags:
+      - USERS
+securityDefinitions:
+  BearerToken:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
